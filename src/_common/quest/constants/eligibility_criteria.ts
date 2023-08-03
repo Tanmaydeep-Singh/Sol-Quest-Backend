@@ -1,0 +1,6 @@
+export enum EligibityCriteria {
+	ALL_USERS = "ALL_USERS",
+	NEW_USERS = "NEW_USERS",
+	NFT_HOLDERS = "NFT_HOLDERS",
+	MIN_POINT_CHECK = "POINTS_CHECK",
+}

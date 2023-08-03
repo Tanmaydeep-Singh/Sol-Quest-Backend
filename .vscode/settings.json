@@ -1,0 +1,16 @@
+{
+	"prettier.tabWidth": 4,
+	"prettier.trailingComma": "all",
+	"prettier.useTabs": true,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.indentSize": "tabSize",
+	"explorer.sortOrder": "type",
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true,
+		"source.organizeImports": true
+	},
+	"explorer.fileNesting.enabled": false
+}
