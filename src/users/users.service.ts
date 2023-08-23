@@ -3,6 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Document, Model } from "mongoose";
 import UserQueryService from "../_common/database/queries/user.query";
 import { UserDocument, modelName as userModelName } from "../_common/database/schema/user.schema";
+import { NewUserDTO } from "./dtos/getUserById.dto";
 
 @Injectable()
 export class UsersService {
@@ -20,8 +21,14 @@ export class UsersService {
 		return this.userQueryService.readMultipleEntities(
 			{},
 			{ limit: 100 },
-			{ games: 0, courses: 0 },
 		);
+	}
+
+	async createNewUser(body: NewUserDTO): Promise<boolean> {
+		console.log("called");
+		const user = await this.userQueryService.createEntity(body);
+		console.log( user );
+		return true;
 	}
 
 	async getUserProfile(walletAddress: string): Promise<Document> {

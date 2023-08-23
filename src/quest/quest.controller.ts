@@ -11,12 +11,12 @@ import {
 	Query,
 } from "@nestjs/common";
 import { QuestProgressDocument } from "../_common/database/schema/questProgress.schema";
+import { CreateQuestDto } from "./dtos/QuestDto";
 import { QuestProgressDTO } from "./dtos/QuestProgressDto";
 import { QuestService } from "./quest.service";
 
 @Controller({ path: "quest", version: "1" })
 export class QuestController {
-	// eslint-disable-next-line no-useless-constructor, no-unused-vars, no-empty-function
 	constructor(private questService: QuestService) {}
 
 	@Get()
@@ -24,14 +24,13 @@ export class QuestController {
 		return this.questService.getUsers();
 	}
 
-	@Post()
-	async createUser(@Body() body) {
-		return this.questService.postUser(body);
+	@Post("create-quest")
+	async createQuest(@Body() createQuestDto: CreateQuestDto) {
+		return this.questService.createQuest(createQuestDto);
 	}
 
 	@Post("quests")
 	async createQuestProgress(@Body() body) {
-		console.log("called", body);
 		return this.questService.postQuestProgress(body);
 	}
 

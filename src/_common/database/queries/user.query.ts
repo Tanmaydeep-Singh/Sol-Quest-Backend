@@ -18,7 +18,6 @@ export default class UserQueryService extends GenericQueryService<UserDocument> 
 			if (await this.checkValidity({ walletAddress }))
 				throw new BadRequestException(`${this.modelName} already exists`);
 		}
-
 		return super.createEntity(data);
 	}
 

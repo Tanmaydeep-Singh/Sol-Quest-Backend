@@ -1,11 +1,12 @@
+import { QuestStatus } from "@common/quest/constants/quest";
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { startOfMonth, startOfToday, sub } from "date-fns";
-import mongoose, { Model } from "mongoose";
+import mongoose, { Model, Types } from "mongoose";
 import QuestQueryService from "../_common/database/queries/quest.query";
 import QuestProgressQueryService from "../_common/database/queries/questProgress.query";
 import UserQueryService from "../_common/database/queries/user.query";
-import { QuestDocument, modelName as questModel } from "../_common/database/schema/quest.schema";
+import { IQuest, QuestDocument, modelName as questModel } from "../_common/database/schema/quest.schema";
 import {
 	QuestProgressDocument,
 	modelName as questProgressModel,
@@ -55,6 +56,45 @@ export class QuestService {
 		} catch (error: any) {
 			throw new BadRequestException(error);
 		}
+	}
+
+	async createQuest(createQuestDto) {
+		const {
+			createdBy,
+			questTitle,
+			questDescription,
+			imageurl,
+			eligibility,
+			tasks,
+			gemsReward,
+			rewardMethod,
+			rewardType,
+			startTimestamp,
+			endTimestamp,
+		} = createQuestDto;
+
+		console.log(createQuestDto);
+
+		await this.taskQueryService.createMultipleEntities(tasks);
+
+		await this.userQueryService.checkValidity({ _id: createdBy });
+
+		const newQuest: IQuest = {
+			createdBy: new Types.ObjectId(createdBy),
+			questTitle,
+			questDescription,
+			imageurl,
+			eligibility,
+			tasks,
+			rewardMethod,
+			rewardType,
+			gemsReward,
+			startTimestamp,
+			endTimestamp,
+			status: QuestStatus.UPCOMING,
+		};
+
+		return this.questQueryService.createEntity(newQuest);
 	}
 
 	async getUser(walletId: string) {

@@ -6,3 +6,9 @@ export class GetUserByIdDtoParams {
 	@Validate(IsWalletAddress)
 	walletAddress: string;
 }
+
+
+export class NewUserDTO {
+	@IsString()
+	walletAddress: string;
+}
