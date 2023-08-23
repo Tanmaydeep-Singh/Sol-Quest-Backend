@@ -1,8 +1,4 @@
-# Game_coaching
-
-## API docs
-
-https://documenter.getpostman.com/view/21649947/2s93CRMCaj
+#     SOL-QUEST-BACKEND
 
 ## How to start developing
 
